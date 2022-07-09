@@ -1,26 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Cat
 
 # Demo Cat Data - Replace with Database
 
-class Cat:
-  def __init__(self, name, breed, description, age):
-    self.name = name
-    self.breed = breed
-    self.description = description
-    self.age = age
+# class Cat:
+#   def __init__(self, name, breed, description, age):
+#     self.name = name
+#     self.breed = breed
+#     self.description = description
+#     self.age = age
 
-cats = [
-  Cat('Lolo', 'tabby', 'foul little demon', 3),
-  Cat('Yoda', 'himalayan', 'orange ball of fluff', 15),
-  Cat('Kajit', 'black cat', 'the best cat ever that ran away', 4)
-]    
+# cats = [
+#   Cat('Lolo', 'tabby', 'foul little demon', 3),
+#   Cat('Yoda', 'himalayan', 'orange ball of fluff', 15),
+#   Cat('Kajit', 'black cat', 'the best cat ever that ran away', 4)
+# ]    
 
 
 # Create your views here.
 
 def home(request):
   return HttpResponse('<h1>Hello World /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+
+def base(request):
+  return render(request, 'base.html')
 
 
 def about(request):
@@ -31,4 +35,5 @@ def about(request):
 
 
 def cats_index(request):
+  cats = Cat.objects.all()
   return render(request, 'cats/index.html', {'cats': cats })
